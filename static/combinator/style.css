@@ -1,0 +1,27 @@
+.contour{
+    border: solid black;
+    margin: auto;
+    padding: 2em;
+}
+
+.word{
+      border: solid black;
+    display:inline-block;
+    padding: 2em;
+}
+
+.drop-item {
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+   display:inline-block;
+    padding: 2em;
+  border-radisu: 3px;
+  border: 1px solid rgb(204, 204, 204);
+  position: relative;
+}
+
+.drop-item .remove {
+  top: 4px;
+  right: 4px;
+}
