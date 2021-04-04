@@ -7,8 +7,10 @@ from flask import request
 import gensim.downloader as api
 from flask import jsonify
 from flask import json
+import json as js
 
-from W2VUtility import getCloseWordIn3D, getCloseWord
+import W2VUtility as w2v
+from model.composition_generator import CompositionGenerator
 
 app = Flask(__name__)
 
@@ -19,14 +21,38 @@ app.config.update(
 
 model = api.load("glove-wiki-gigaword-100")
 
-@app.route('/getcloseWord')
-def get3dWord(n=1):
-   content = request.get_json()
-   print(content)
+compo = CompositionGenerator(["Kingdom.csv"])
+compo.generate()
 
-   positve = request.args.get('positive')
-   negative = request.args.get('negative')
-   res= getCloseWord(positve,negative,model)
+fword = compo.firstWorld()
+
+print("First word ",fword)
+
+#Supervise : on a controle les input et reponce
+@app.route('/getCumstomeCloseWord')
+def getCustomCloseWord(n=1):
+    positve = js.loads(request.args.get('positive'))
+    negative = js.loads(request.args.get('negative'))
+    print("Positive",positve,"negative",negative)
+    res = compo.getWordFormate(positve,negative)
+    print("res ",res)
+    response = app.response_class(
+        response=json.dumps(res),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+#Non supervise uniqument avec le modelle de W2V
+@app.route('/getcloseWord')
+def getCloseWord(n=1):
+
+   print(request.is_json)
+   positve = js.loads(request.args.get('positive'))
+   print("positive",positve)
+   negative = js.loads(request.args.get('negative'))
+   print("negative",negative)
+   res= w2v.getCloseWord(positve,negative,model)
    print(res)
    response = app.response_class(
        response=json.dumps(res),
@@ -36,10 +62,10 @@ def get3dWord(n=1):
    return response
 
 @app.route('/getword')
-def get3dWord(n=1):
+def get3dWord(n=42):
    w = request.args.get('word')
    print("word : ",w)
-   res= getCloseWordIn3D(w,model);
+   res= w2v.getCloseWordIn3D(w,model);
    print(res)
    response = app.response_class(
        response=json.dumps(res),
@@ -75,7 +101,7 @@ def index():
 
 @app.route("/combi")
 def combi():
-    return render_template("combinator.html")
+    return render_template("combinator.html",fword=fword)
 
 #background process happening without any refreshing
 @app.route('/background_process_test')

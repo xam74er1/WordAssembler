@@ -2,12 +2,15 @@
 var wordInCache = []
 
 $( function() {
+    //done au mot de base la possiblite detre drag
     $(".word").draggable(
         {
             appendTo: 'body',
             helper: 'clone'
         }
     );
+
+    //Permet la zone de drop avec un evnet au drop
     $("#dropZone").droppable({
 
         activeClass: 'active',
@@ -18,7 +21,10 @@ $( function() {
             //On cree un ellment equivalle
             var $el = $('<div class="drop-item"><summary>' + ui.draggable.text() + '</summary></div>');
             //On lui ajoute un bouton pour le suprime
-            $el.append($('<button type="button" class="btn btn-default btn-xs remove"><span class="pubelle">Suprime</span></button>').click(function () { $(this).parent().detach(); }));
+            $el.append($('<button type="button" class="btn btn-default btn-xs remove"><span class="pubelle">Suprime</span></button>').click(function () {
+                $(this).parent().detach();
+
+            }));
             $(this).append($el);
 
             var text = ui.draggable.text();
@@ -36,10 +42,15 @@ $( function() {
     });
 } );
 
+//Si on a au moin 2 mot verife dans le backen ladtion des mot
 function verifie(){
     if(wordInCache.length>=2){
 
-        getCloseWord(wordInCache,[])
+        let tmpPositive =[];
+        for (let i =0;i<wordInCache.length;i++){
+            tmpPositive.push(wordInCache[i][0]);
+        }
+        getCloseWord(tmpPositive,[])
 
   //On netoit tout
         $("#dropZone").empty();
@@ -49,10 +60,12 @@ function verifie(){
     }
 }
 
+//Demende au backende de calcule les mot les plus proche de l'exprssion
+// ex : demede closeWord("king-man+whoman") il renvois queen
 function getCloseWord(positive,negative) {
     var resultat;
     $.ajax({
-        url: '/getword',
+        url: "/getCumstomeCloseWord" ,
         data: {
             "positive": JSON.stringify(positive),
             "negative":JSON.stringify(negative)
@@ -62,6 +75,13 @@ function getCloseWord(positive,negative) {
         success: function(response) {
             console.log("------")
             console.log(response)
+            if(response['word'][0]!=undefined&&response['word'][0].length>0){
+                addWord(response['word'][0].trim())
+                console.log("Add "+response['word'][0])
+            }else{
+                console.log("Not word add")
+            }
+
             //cube.material.color.setHex(response)
             resultat = response;
 
@@ -70,13 +90,22 @@ function getCloseWord(positive,negative) {
     });
     return resultat;
 }
-
+//Cette fonction permet d'ajoute un mot
 function addWord(word){
 
     console.log($('#wordZone:contains("'+word+'")'))
     //Si let mot n'est pas deja present
     if($('#wordZone:contains("'+word+'")').length <= 0){
-        $("#wordZone").append($('<div class="word">'+word+' </div>'))
+
+        //On cree un nouveau mot
+        let motTmp = $('<div class="word">'+word+'</div>').draggable(
+        {
+            appendTo: 'body',
+            helper: 'clone'
+        })
+
+        //on l'ajoute a la zone des mot
+        $("#wordZone").append(motTmp)
     }
 
 }

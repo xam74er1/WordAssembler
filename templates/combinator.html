@@ -17,12 +17,17 @@
     </div>
 
     <div id="wordZone" class="contour">
-        <div class="word">king</div>
-        <div class="word">man</div>
+        {% for val in fword %}
+        <div class="word">{{ val }}</div>
+        {% endfor %}
+
     </div>
 
 </div>
 
-<script type="module" src="static/combinator/app.js"></script>
+<script type="module" src="static/combinator/app.js">
+    //getUrl "/getcloseWord"
+    getUrl = "/getCumstomeCloseWord"
+</script>
 </body>
 </html>
