@@ -1,3 +1,4 @@
+from os import getcwd
 from typing import List
 
 from model.Composition import Composition

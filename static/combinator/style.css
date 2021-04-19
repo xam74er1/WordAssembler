@@ -1,27 +1,70 @@
 .contour{
     border: solid black;
     margin: auto;
+    padding : 1em;
+}
+
+.Title{
+    text-align: center;
+    font-size: xxx-large;
+}
+
+#dropZone{
+    border: solid black;
+    margin: auto;
+    padding : 1em;
+    background: #018d8f;
+}
+
+#addZone{
+    display: inline-block;
+    background: #769f23;
+    border: 0px;
     padding: 2em;
+    margin-right: 1em;
+    border-radius: 1em;
+    width : 60%;
+}
+
+#subZone{
+    display: inline-block;
+    background: #9a0019;
+    border: 0px;
+    padding: 2em;
+    border-radius: 1em;
+    width : 30%;
 }
 
 .word{
-      border: solid black;
+    border: solid black;
     display:inline-block;
     padding: 2em;
+    width : 10em;
+    text-align: center;
+    border-radius: 1em;
+    margin : 1em;
+    background: #26a77b;
 }
 
 .drop-item {
-  cursor: pointer;
-  margin-bottom: 10px;
-  background-color: rgb(255, 255, 255);
-   display:inline-block;
+    cursor: pointer;
+    margin: 1em;
+    background-color: rgb(125, 125, 125);
+    display:inline-block;
+    text-align: center;
     padding: 2em;
-  border-radisu: 3px;
-  border: 1px solid rgb(204, 204, 204);
-  position: relative;
+    width : 10em;
+    border-radius: 1em;
+    border: solid rgb(204, 204, 204);
+    position: relative;
+    color: aqua;
 }
 
 .drop-item .remove {
-  top: 4px;
-  right: 4px;
+    top: 4px;
+    right: 4px;
+}
+
+body{
+    background: #dbd4c9;
 }

@@ -1,6 +1,6 @@
 from flask import Flask,render_template,make_response
 import numpy
-from stl import mesh
+import mesh
 from io import BytesIO
 import random
 from flask import request

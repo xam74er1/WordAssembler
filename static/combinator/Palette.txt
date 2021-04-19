@@ -1,0 +1,17 @@
+https://javier.xyz/cohesive-colors/?src=7f81a1,F38630,629b36,FA2A00,349daf,924764&overlay=FF9C00&intensity=0.3
+
+#a58985, #f78e22, #7fa226, #fc2d00, #44a497, #b34c46
+
+#0188a2
+#fccb8b
+#580346
+#20a391
+#fc7839
+#7aa450
+#a00528
+
+
+https://javier.xyz/cohesive-colors/?src=0188a2,ffd6a1,580346,20a391,fc7839,629a2c,81001f,d2d2d2&overlay=FF9C00&intensity=0.2
+#018d8f, #ffd88e, #6a0338, #26a77b, #fd7d2e, #769f23, #9a0019, #dbd4c9
+
+https://material-ui.com/fr/customization/color/
