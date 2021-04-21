@@ -1,3 +1,15 @@
+:root {
+    --addOn: brown;
+    --addOff : yellow;
+    --subOn : red;
+    --subOff : blue;
+    --backColor : green;
+    --wordColor : crimson;
+    --alertInfo : lightblue;
+    --alertDanger : red;
+    --alertSuccess : green;
+}
+
 .contour{
     border: solid black;
     margin: auto;
@@ -18,7 +30,7 @@
 
 #addZone{
     display: inline-block;
-    background: #769f23;
+    background: var(--addOff);
     border: 0px;
     padding: 2em;
     margin-right: 1em;
@@ -28,7 +40,7 @@
 
 #subZone{
     display: inline-block;
-    background: #9a0019;
+    background: var(--subOff);
     border: 0px;
     padding: 2em;
     border-radius: 1em;
@@ -43,7 +55,7 @@
     text-align: center;
     border-radius: 1em;
     margin : 1em;
-    background: #26a77b;
+    background: var(--wordColor);
 }
 
 .drop-item {
@@ -67,4 +79,64 @@
 
 body{
     background: #dbd4c9;
+}
+
+
+/*Alert*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 1em;
+    border: 1px solid #888;
+    border-radius: 1em;
+    width: 80%;
+    opacity: 0.9;
+    text-align: center;
+}
+
+/* The Close Button */
+.closeAlert {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeAlert:hover,
+.closeAlert:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alertInfo{
+    background-color: var(--alertInfo);
+}
+
+.alertDanger{
+    background-color: var(--alertDanger);
+}
+
+.alertSuccess{
+    background-color: var(--alertSuccess);
+}
+
+#AlertText{
+    font-size: large;
+    font-weight: bold;
 }
