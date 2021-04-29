@@ -105,7 +105,7 @@ body{
     border: 1px solid #888;
     border-radius: 1em;
     width: 80%;
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     text-align: center;
 }
 

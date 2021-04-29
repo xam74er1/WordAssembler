@@ -1,6 +1,7 @@
 var wordInCache = []
 var addInCache = []
 var subInCache = []
+var allWord = []
 
 $( function() {
     //done au mot de base la possiblité d'être drag
@@ -129,20 +130,11 @@ $( function() {
 
 //Si on a au moins 2 mot vérifie dans le backend l'addition des mots
 function verifie(){
-    if(wordInCache.length>=2){
+    console.log("Verifie")
+    if((addInCache.length+subInCache.length)>=2){
 
-        let tmpPositive =[];
-        for (let i =0;i<wordInCache.length;i++){
-            tmpPositive.push(wordInCache[i]);
-        }
-        getCloseWord(tmpPositive,[])
 
-  //On netoit tout
-        $("#addZone").empty();
-        $("#subZone").empty();
-        $("#addZone").append("<div class=\"Title\">Add</div>");
-        $("#subZone").append("<div class=\"Title\">Subtract</div>");
-        wordInCache = []
+        getCloseWord(addInCache,subInCache)
 
 
     }
@@ -151,6 +143,7 @@ function verifie(){
 //Demende au backende de calcule les mot les plus proche de l'exprssion
 // ex : demede closeWord("king-man+woman") il renvois queen
 function getCloseWord(positive,negative) {
+    console.log("Get close word ",positive,negative)
     var resultat;
     $.ajax({
         url: "/getCumstomeCloseWord" ,
@@ -163,9 +156,20 @@ function getCloseWord(positive,negative) {
         success: function(response) {
             console.log("------")
             console.log(response)
-            if(response['word'][0]!=undefined&&response['word'][0].length>0){
+            if(response['word'][0]!=undefined&&response['word'][0].length>0&&!allWord.includes(response['word'][0].trim())){
                 addWord(response['word'][0].trim())
                 console.log("Add "+response['word'][0])
+
+
+                //On netoit tout
+                $("#addZone").empty();
+                $("#subZone").empty();
+                $("#addZone").append("<div class=\"Title\">Add</div>");
+                $("#subZone").append("<div class=\"Title\">Subtract</div>");
+                addInCache = []
+                subInCache = []
+                wordInCache = []
+
                 popUpAlert("You have unlock the word " + response['word'][0], "Success")
             }else{
                 console.log("Not word add")
@@ -188,13 +192,14 @@ function addWord(word){
 
         //On cree un nouveau mot
         let motTmp = $('<div class="word">'+word+'</div>').draggable(
-        {
-            appendTo: 'body',
-            helper: 'clone'
-        })
+            {
+                appendTo: 'body',
+                helper: 'clone'
+            })
 
         //on l'ajoute a la zone des mot
         $("#wordZone").append(motTmp)
+        allWord.push(word)
     }
 
 }
@@ -215,12 +220,12 @@ var spanAlert = document.getElementsByClassName("closeAlert")[0];
 
 // When the user clicks on <span> (x), close the modal
 spanAlert.onclick = function() {
-  popUp.style.display = "none";
+    popUp.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  popUp.style.display = "none";
+    popUp.style.display = "none";
 }
 
 /*Function paramétrant la PopUp
