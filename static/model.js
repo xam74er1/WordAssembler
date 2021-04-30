@@ -7,7 +7,7 @@ export class Entiter{
         this.couleur=couleur;
 
         this.sphereGeo = new THREE.SphereGeometry( 1*multi, 32, 32 );
-        this.sphereMat = new THREE.MeshBasicMaterial( {color: this.couleur} );
+        this.sphereMat = new THREE.MeshBasicMaterial( {color: this.couleur,wireframe:false} );
         this.sphere = new THREE.Mesh(this.sphereGeo, this.sphereMat);
 
         const loader = new THREE.FontLoader();

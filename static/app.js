@@ -52,7 +52,7 @@ function createWord(){
     mainWord.addToScene(scene)
 
     for(let i =0;i<10;i++){
-        let tmp = new model.Entiter(" entiter "+i,"yellow",font)
+        let tmp = new model.Entiter(" entiter "+i,"#34d9eb",font)
         tmp.setPostion(i*5,0,0)
         tmp.addToScene(scene);
         listCube.push(tmp);

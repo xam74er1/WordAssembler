@@ -1,14 +1,43 @@
 :root {
     --addOn: brown;
-    --addOff : yellow;
+    --addOff: #4caf50;
     --subOn : red;
-    --subOff : blue;
+    --subOff: #f44336;
     --backColor : green;
     --wordColor : crimson;
     --alertInfo : lightblue;
     --alertDanger : red;
     --alertSuccess : green;
 }
+
+/*
+WORD in 3D
+ */
+
+.container{
+    display: flex;
+    background: #333;
+    color: white;
+    margin: auto;
+    text-decoration: none;
+    font-size: 17px;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.container h3{
+    margin-right: 1em;
+}
+
+.container button:hover{
+    background: none;
+}
+
+
+
+/*
+COMBINATOR
+ */
 
 .contour{
     border: solid black;
@@ -55,8 +84,10 @@
     text-align: center;
     border-radius: 1em;
     margin : 1em;
-    background: var(--wordColor);
+    box-shadow: 7px 8px 0px -3px rgb(0 0 0 / 20%), 3px 8px 4px 0px rgb(0 0 0 / 14%), -11px 17px 8px 0px rgb(0 0 0 / 12%);
+    background: #4492d0;
 }
+
 
 .drop-item {
     cursor: pointer;
@@ -78,7 +109,7 @@
 }
 
 body{
-    background: #dbd4c9;
+    background: white;
 }
 
 
@@ -139,4 +170,61 @@ body{
 #AlertText{
     font-size: large;
     font-weight: bold;
+}
+
+/*
+MENU
+ */
+
+#myLinks{
+    display: flex;
+    background-color: #333;
+    float: none;
+    overflow: hidden;
+    flex-grow: 100;
+}
+
+.topnav{
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    width: 100%;
+}
+
+/* Style navigation menu links */
+.topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+    background: black;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.lien:hover {
+    background-color: #ddd;
+    color: black;
+}
+.btDiv{
+    font-size: 1.1em;
+    background: #333;
+    display: flex;
+}
+.icon{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    text-decoration: none;
+    padding: 10px;
+    background: #333;
+    color: white;
+
 }
