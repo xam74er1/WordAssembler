@@ -1,13 +1,17 @@
 :root {
-    --addOn: brown;
-    --addOff: #4caf50;
-    --subOn : red;
-    --subOff: #f44336;
-    --backColor : green;
-    --wordColor : crimson;
-    --alertInfo : lightblue;
-    --alertDanger : red;
-    --alertSuccess : green;
+    --addOn: #a6d8a8;
+    --addOff: #4eb151;
+    --subOn : #f98e86;
+    --subOff: #f21c0d;
+    --backColor : #1daae2;
+    --alertInfo : #1788b5;
+    --alertDanger : #c2160a;
+    --alertSuccess : #3e8e41;
+    --alertWarning : #cc8500;
+}
+
+*{
+    font-family:comfortaa;
 }
 
 /*
@@ -33,16 +37,17 @@ WORD in 3D
     background: none;
 }
 
-
-
 /*
 COMBINATOR
  */
 
 .contour{
+    cursor: default;
     border: solid black;
-    margin: auto;
+    border-width:0 0 2px 0;
+    margin: 0 0 0 0;
     padding : 1em;
+    width : 100%;
 }
 
 .Title{
@@ -51,10 +56,13 @@ COMBINATOR
 }
 
 #dropZone{
-    border: solid black;
     margin: auto;
     padding : 1em;
-    background: #018d8f;
+    background: var(--backColor);
+}
+
+#commandZone{
+    background-color: #fde8f1;
 }
 
 #addZone{
@@ -76,37 +84,52 @@ COMBINATOR
     width : 30%;
 }
 
-.word{
-    border: solid black;
+/*Drop Item : In the drop zone*/
+#score, .drop-item {
+    list-style-type:none;
+    color:#454545;
+    background-color:#fff;
+    border: 2px solid black;
+    position:relative;
+    margin:1em;
     display:inline-block;
-    padding: 2em;
-    width : 10em;
-    text-align: center;
-    border-radius: 1em;
-    margin : 1em;
-    box-shadow: 7px 8px 0px -3px rgb(0 0 0 / 20%), 3px 8px 4px 0px rgb(0 0 0 / 14%), -11px 17px 8px 0px rgb(0 0 0 / 12%);
-    background: #4492d0;
+    padding:0.5em 1em;
+    text-align:center;
+    font-family:comfortaa;
+    font-weight:bold
 }
 
-
-.drop-item {
-    cursor: pointer;
-    margin: 1em;
-    background-color: rgb(125, 125, 125);
-    display:inline-block;
-    text-align: center;
-    padding: 2em;
-    width : 10em;
-    border-radius: 1em;
-    border: solid rgb(204, 204, 204);
-    position: relative;
-    color: aqua;
+#score:before, #score:after, .modal-content:before, .modal-content:after, .drop-item:before, .drop-item:after {
+    content:'';
+    display:block;
+    position:absolute;
+    border-color:black;
+    box-sizing:border-box;
+    border-style:solid;
+    width:calc(10% + 12px);
+    height:calc(10% + 12px);
 }
 
-.drop-item .remove {
-    top: 4px;
-    right: 4px;
+#score:before, .modal-content:before, .drop-item:before {
+    top:-8px;left:-8px;
+    border-width:2px 0 0 2px;
+    z-index:5;
 }
+
+#score:after, .modal-content:after, .drop-item:after {
+    bottom:-8px;
+    right:-8px;
+    border-width:0 2px 2px 0;
+}
+
+#score:before, #score:after, #score{
+    border-color: #eb1777;
+    color:#eb1777;
+    background-color: transparent;
+}
+
+/*End Drop Item*/
+
 
 body{
     background: white;
@@ -130,22 +153,21 @@ body{
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
     margin: auto;
     padding: 1em;
-    border: 1px solid #888;
-    border-radius: 1em;
+    border: 2px solid black;
     width: 80%;
-    /*opacity: 0.9;*/
+    opacity: 0.95;
     text-align: center;
 }
 
 /* The Close Button */
 .closeAlert {
     color: #aaaaaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    position : fixed;
+    right: 13%;
 }
 
 .closeAlert:hover,
@@ -167,9 +189,15 @@ body{
     background-color: var(--alertSuccess);
 }
 
-#AlertText{
+.alertWarning{
+    background-color: var(--alertWarning);
+}
+
+#RestartText, #AlertText{
     font-size: large;
     font-weight: bold;
+    float : left;
+    margin : 0 0 0 0;
 }
 
 /*
@@ -186,7 +214,7 @@ MENU
 
 .topnav{
     overflow: hidden;
-    position: absolute;
+    position: sticky;
     display: flex;
     width: 100%;
 }

@@ -2,11 +2,13 @@ var wordInCache = []
 var addInCache = []
 var subInCache = []
 var allWord = []
+var score = 0;
 
 $( function() {
     //done au mot de base la possiblité d'être drag
     $(".word").draggable(
         {
+            cancel:false,
             appendTo: 'body',
             helper: 'clone'
         }
@@ -47,10 +49,6 @@ $( function() {
                     //Peutre le reire en obj a locase
                     addInCache.push(text);
                 }
-
-
-                verifie();
-
                 console.log("after : " + addInCache)
             }
             else
@@ -105,16 +103,12 @@ $( function() {
                     //Peutre le reire en obj a locase
                     subInCache.push(text);
                 }
-
-                verifie();
-
                 console.log("after : " + subInCache)
             }
             else
             {
                 popUpAlert("You can't subtract more than 2 words", "Danger")
             }
-
             //On reset la couleur de survol
             $(this).css('background', 'var(--subOff)');
         },
@@ -126,19 +120,49 @@ $( function() {
         }
     });
 
+
+    $("#Compute").on("click", function(){
+        console.log("Verifie")
+        if((addInCache.length+subInCache.length)>=2)
+            getCloseWord(addInCache,subInCache);
+        else
+            //Pour que l'évènement de cloture arrive avant
+            setTimeout(function(){popUpAlert("You must use at least 2 words", "Warning")}, 5)
+
+
+    })
+
+    $("#RemoveAll").on("click", function(){clear()})
+
+    $("#Restart").on("click", function (){
+
+        document.getElementById("RestartPopUp").style.display = "block";
+        $("#RestartYes").on("click", function () {
+            window.location.reload();
+        });
+        $("#RestartNo").on("click", function () {
+            document.getElementById("RestartPopUp").style.display = "none";
+        });
+
+    })
+
 } );
 
-//Si on a au moins 2 mot vérifie dans le backend l'addition des mots
-function verifie(){
-    console.log("Verifie")
-    if((addInCache.length+subInCache.length)>=2){
 
+function clear(){
 
-        getCloseWord(addInCache,subInCache)
+    //On nettoie tout
+    $("#addZone").empty();
+    $("#subZone").empty();
+    $("#addZone").append("<div class=\"Title\">Add</div>");
+    $("#subZone").append("<div class=\"Title\">Subtract</div>");
+    addInCache = []
+    subInCache = []
+    wordInCache = []
 
-
-    }
 }
+
+
 
 //Demende au backende de calcule les mot les plus proche de l'exprssion
 // ex : demede closeWord("king-man+woman") il renvois queen
@@ -160,19 +184,15 @@ function getCloseWord(positive,negative) {
                 addWord(response['word'][0].trim())
                 console.log("Add "+response['word'][0])
 
+                clear();
 
-                //On netoit tout
-                $("#addZone").empty();
-                $("#subZone").empty();
-                $("#addZone").append("<div class=\"Title\">Add</div>");
-                $("#subZone").append("<div class=\"Title\">Subtract</div>");
-                addInCache = []
-                subInCache = []
-                wordInCache = []
+                score += response['word'][1];
+                $("#score").text("Score : " + response['word'][1]);
 
-                popUpAlert("You have unlock the word " + response['word'][0], "Success")
+                popUpAlert("You have unlock the word " + response['word'][0] + " ! You won " + response['word'][1] + " points", "Success")
             }else{
-                console.log("Not word add")
+                console.log("No word add")
+                popUpAlert("You haven't unlock any word ! Please try again !", "Warning")
             }
 
             //cube.material.color.setHex(response)
@@ -191,8 +211,9 @@ function addWord(word){
     if($('#wordZone:contains("'+word+'")').length <= 0){
 
         //On cree un nouveau mot
-        let motTmp = $('<div class="word">'+word+'</div>').draggable(
+        let motTmp = $('<button class="word">'+word+'</button>').draggable(
             {
+                cancel:false,
                 appendTo: 'body',
                 helper: 'clone'
             })
@@ -235,7 +256,7 @@ function popUpAlert(text, type){
 
     popUpText.textContent = text
 
-    popUpContent.classList.remove("alertDanger")
+    popUpContent.classList.remove("alertDanger", "alertInfo", "alertSuccess", "alertWarning")
     if(type == "Danger"){
         popUpContent.classList.add("alertDanger")
     }
@@ -244,6 +265,9 @@ function popUpAlert(text, type){
     }
     if(type == "Success"){
         popUpContent.classList.add("alertSuccess")
+    }
+    if(type == "Warning"){
+        popUpContent.classList.add("alertWarning")
     }
 
     popUp.style.display = "block"

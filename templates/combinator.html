@@ -13,6 +13,7 @@
 
     <!--CSS -->
     <link href="static/combinator/style.css" rel= "stylesheet" type= "text/css">
+    <link href="static/combinator/button.css" rel= "stylesheet" type= "text/css">
 
     <script>
     function myFunction() {
@@ -66,9 +67,17 @@
 
     </div>
 
-    <div id="wordZone" class="contour">
+    <div id="commandZone" class="contour panel completeButton">
+
+        <div id="score">Score : 0</div>
+        <button id="Compute">Compute</button>
+        <button id="RemoveAll">Remove All</button>
+        <button id="Restart">Restart</button>
+    </div>
+
+    <div id="wordZone" class="contour panel returnButton">
         {% for val in fword %}
-        <div class="word">{{ val }}</div>
+        <button class="word">{{ val }}</button>
         {% endfor %}
 
     </div>
@@ -81,6 +90,16 @@
   <div id="AlertPopUpContent" class="modal-content">
     <span class="closeAlert">&times;</span>
     <p id="AlertText">Danger</p>
+  </div>
+
+</div>
+
+<div id="RestartPopUp" class="modal">
+
+  <div class="modal-content alertWarning">
+      <span class="closeAlert">&times;</span>
+      <p id="RestartText">Are you sure you want to start over ?</p>
+      <button id="RestartNo">No</button><button id="RestartYes">Yes</button>
   </div>
 
 </div>
