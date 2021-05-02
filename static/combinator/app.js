@@ -192,7 +192,7 @@ function getCloseWord(positive,negative) {
                 popUpAlert("You have unlock the word " + response['word'][0] + " ! You won " + response['word'][1] + " points", "Success")
             }else{
                 console.log("No word add")
-                popUpAlert("You haven't unlock any word ! Please try again !", "Warning")
+                popUpAlert("You haven't unlocked any word ! Please try again !", "Warning")
             }
 
             //cube.material.color.setHex(response)
