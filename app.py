@@ -46,7 +46,11 @@ def getCustomCloseWord(n=1):
     positve = js.loads(request.args.get('positive'))
     negative = js.loads(request.args.get('negative'))
     print("Positive",positve,"negative",negative)
-    ftype = js.loads(request.args.get('fileName'));
+    fname = request.args.get('fileName')
+    print("fname :",fname)
+    if(fname==None):
+        fname="Kingdom"
+    ftype = fname
     print("file name", ftype)
     compo = mapCompo[ftype]
     res = compo.getWordFormate(positve,negative)
