@@ -19,18 +19,13 @@ class CompositionGenerator:
             line = file1.readline();
             while line:
                 #print(line)
-                print("-----")
+
                 compo = Composition();
-                print("Avant parse ",compo.positive)
                 compo.parse(line)
                 #On rajoute la composition
                 self.listComposition.append(compo)
-
-                print("apres : ",compo.positive)
                 line = file1.readline();
-        print("\n\n\n")
-        for c in self.listComposition:
-            print(c.positive)
+
     def getWordFormate(self,positive,negative):
         res : Composition = self.getWord(positive,negative)
         toReturn = {}

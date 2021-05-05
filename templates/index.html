@@ -32,8 +32,13 @@
         </button>
     </div>
     <div id="myLinks">
-        <a class="lien" href="/combi">Combinator</a>
-        <a class="lien" href="/">3 Word</a>
+            {% for name in allFile %}
+            <a href="/combi?type={{ name }}">{{ name }}</a>
+            {% endfor %}
+    <div class="separator"></div>
+            <a href="/">3D Word</a>
+
+
     <div class='container'>
         <h3>Write a word </h3>
         <form>

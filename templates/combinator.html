@@ -39,8 +39,11 @@
     </button>
 </div>
         <div id="myLinks">
-            <a href="/combi">Combinator</a>
-            <a href="/">3 Word</a>
+            {% for name in allFile %}
+            <a href="/combi?type={{ name }}">{{ name }}</a>
+            {% endfor %}
+        <div class="separator"></div>
+            <a href="/">3D Word</a>
 
     </div>
 
@@ -104,10 +107,13 @@
 
 </div>
 
-
+<script>
+        getUrl = "/getCumstomeCloseWord"
+    wordName ="{{ acutalWord }}"
+</script>
 <script src="static/combinator/app.js">
     //getUrl "/getcloseWord"
-    getUrl = "/getCumstomeCloseWord"
+
 </script>
 </body>
 </html>

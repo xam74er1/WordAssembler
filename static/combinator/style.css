@@ -210,6 +210,7 @@ MENU
     float: none;
     overflow: hidden;
     flex-grow: 100;
+    align-items: center;
 }
 
 .topnav{
@@ -255,4 +256,11 @@ MENU
     background: #333;
     color: white;
 
+}
+
+.separator{
+    height: 14px;
+    top:10%;
+    bottom:10%;
+    border-left:1px solid white;
 }

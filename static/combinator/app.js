@@ -168,12 +168,14 @@ function clear(){
 // ex : demede closeWord("king-man+woman") il renvois queen
 function getCloseWord(positive,negative) {
     console.log("Get close word ",positive,negative)
+    console.log("Word name ",wordName)
     var resultat;
     $.ajax({
         url: "/getCumstomeCloseWord" ,
         data: {
             "positive": JSON.stringify(positive),
-            "negative":JSON.stringify(negative)
+            "negative":JSON.stringify(negative),
+            "fileName" :wordName
         },
         cache: false,
         type: "get",
