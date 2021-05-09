@@ -3,7 +3,7 @@ import * as model from "./model.js";
 import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 
 const renderer = new THREE.WebGLRenderer();
-const scene = new THREE.Scene();
+var scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 
@@ -11,9 +11,14 @@ var font = undefined;
 var mainWord = undefined
 var listCube = [];
 
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+var ligthTheme = false;
 
+renderer.setSize( window.innerWidth, window.innerHeight );
+
+document.body.appendChild( renderer.domElement );
+if(ligthTheme) {
+    scene.background = new THREE.Color(0xffffff);
+}
 var controls = new OrbitControls (camera, renderer.domElement);
 
 var gridXZ = new THREE.GridHelper(100, 10);
@@ -46,13 +51,18 @@ const animate = function () {
 animate();
 
 function createWord(){
-
-    mainWord = new model.Entiter(" Main Word ","red",font)
+var textColor = 0xffffff;
+var ballColor = "#34d9eb";
+if(ligthTheme){
+    textColor = 0;
+    ballColor = "#2c489d"
+}
+    mainWord = new model.Entiter(" Main Word ","red",font,textColor)
     mainWord.setPostion(0,0,0)
     mainWord.addToScene(scene)
 
     for(let i =0;i<10;i++){
-        let tmp = new model.Entiter(" entiter "+i,"#34d9eb",font)
+        let tmp = new model.Entiter(" entiter "+i,ballColor,font,textColor)
         tmp.setPostion(i*5,0,0)
         tmp.addToScene(scene);
         listCube.push(tmp);
@@ -125,3 +135,5 @@ $(function() {
         return false;
     });
 });
+
+

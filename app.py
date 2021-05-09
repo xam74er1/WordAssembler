@@ -52,8 +52,12 @@ def getCustomCloseWord(n=1):
         fname="Kingdom"
     ftype = fname
     print("file name", ftype)
-    compo = mapCompo[ftype]
-    res = compo.getWordFormate(positve,negative)
+    if ftype != "free":
+        compo = mapCompo[ftype]
+        res = compo.getWordFormate(positve,negative)
+    else:
+        res = w2v.getCloseWordCustom(positve, negative, model)
+
     print("res ",res)
     response = app.response_class(
         response=json.dumps(res),
@@ -107,8 +111,10 @@ def combi():
     print(ftype)
     if ftype ==None:
         ftype = "Kingdom"
-
-    fword = mapCompo[ftype].firstWorld()
+    if ftype=="free":
+        fword=["water","air","fire","dirt"]
+    else:
+      fword = mapCompo[ftype].firstWorld()
     return render_template("combinator.html",fword=fword,allFile=allFile,acutalWord=ftype)
 
 #background process happening without any refreshing

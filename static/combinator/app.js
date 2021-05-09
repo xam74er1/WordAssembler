@@ -183,15 +183,19 @@ function getCloseWord(positive,negative) {
             console.log("------")
             console.log(response)
             if(response['word'][0]!=undefined&&response['word'][0].length>0&&!allWord.includes(response['word'][0].trim())){
-                addWord(response['word'][0].trim())
-                console.log("Add "+response['word'][0])
+                if(    addWord(response['word'][0].trim())) {
+                    console.log("Add " + response['word'][0])
 
-                clear();
+                    clear();
 
-                score += response['word'][1];
-                $("#score").text("Score : " + response['word'][1]);
+                    score += response['word'][1];
+                    $("#score").text("Score : " + score);
 
-                popUpAlert("You have unlock the word " + response['word'][0] + " ! You won " + response['word'][1] + " points", "Success")
+                    popUpAlert("You have unlock the word " + response['word'][0] + " ! You won " + response['word'][1] + " points", "Success")
+                }else{
+                    console.log("No word add")
+                    popUpAlert("You haven't unlocked any word ! Please try again !", "Warning")
+                }
             }else{
                 console.log("No word add")
                 popUpAlert("You haven't unlocked any word ! Please try again !", "Warning")
@@ -222,8 +226,14 @@ function addWord(word){
 
         //on l'ajoute a la zone des mot
         $("#wordZone").append(motTmp)
-        allWord.push(word)
+        if(! allWord.includes(word)) {
+            allWord.push(word)
+        }else{
+            return false;
+        }
+        return true;
     }
+    return false;
 
 }
 

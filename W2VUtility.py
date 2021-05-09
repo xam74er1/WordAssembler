@@ -38,3 +38,9 @@ def getCloseWordIn3D(word,model,nb=10):
 def getCloseWord(postive,negative,model):
     return model.most_similar(positive=postive,negative=negative, topn=1)
 
+def getCloseWordCustom(postive,negative,model):
+    toReturn = {}
+    res = model.most_similar(positive=postive,negative=negative, topn=1)
+    toReturn["word"] = [res[0][0], 1]
+    return toReturn
+

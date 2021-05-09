@@ -2,7 +2,7 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 const multi = 1;
 export class Entiter{
-    constructor(nom,couleur,font) {
+    constructor(nom,couleur,font,textColor=0xffffff) {
         this.nom=nom;
         this.couleur=couleur;
 
@@ -20,7 +20,7 @@ export class Entiter{
 
         } );
 
-        var textMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+        var textMaterial = new THREE.MeshBasicMaterial( {color: textColor} );
 
 
         this.text = new THREE.Mesh( this.textGeo, textMaterial );
