@@ -5,10 +5,11 @@ from model.Composition import Composition
 
 
 class CompositionGenerator:
-    listFile = []
-    listComposition:List[Composition] = []
+    #listFile = []
+    #listComposition:List[Composition] = []
     def __init__(self,listFile):
         self.listFile = listFile
+        self.listComposition = []
 
     def generate(self):
         for f in self.listFile:
